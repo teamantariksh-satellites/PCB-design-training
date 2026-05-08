@@ -39,7 +39,7 @@ PCB-design-training/
 Since this repo is private, you need to be added as a collaborator before you can clone or push.
 
 Fill in this form with your full name, GitHub username, RVCE email, and batch:
-**[Request Access — Google Form](https://forms.gle/REPLACE_WITH_YOUR_FORM_LINK)**
+**[Request Access — Google Form](https://docs.google.com/forms/d/e/1FAIpQLSfFG6mFy8fZf5oP4RjMfJZ9HOe-E6mcJTuKqpA-HHC0FtBS6A/viewform)**
 
 You will get an email at your RVCE ID with instructions once the invite is sent. Accept the GitHub invitation from your notifications at https://github.com/notifications, then proceed below.
 
