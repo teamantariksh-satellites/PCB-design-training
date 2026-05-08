@@ -1,0 +1,24 @@
+# KiCad backup files
+*.kicad_sch-bak
+*.kicad_pcb-bak
+*.kicad_pro-bak
+*-backups/
+_autosave-*
+
+# KiCad local settings (machine-specific, don't commit)
+fp-lib-table
+sym-lib-table
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor temp files
+*.swp
+*.swo
+*~
+
+# Python cache (KiCad scripting)
+__pycache__/
+*.pyc

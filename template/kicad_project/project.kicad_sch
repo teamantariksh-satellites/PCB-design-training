@@ -1,0 +1,19 @@
+(kicad_sch
+  (version 20230121)
+  (generator eeschema)
+  (paper "A4")
+  (title_block
+    (title "Your Project Name")
+    (date "")
+    (rev "v1.0")
+    (company "Team Antariksh")
+    (comment 1 "Student: Your Name")
+    (comment 2 "PCB Design Training")
+  )
+  (lib_symbols)
+  (sheet_instances
+    (path "/"
+      (page "1")
+    )
+  )
+)
