@@ -48,9 +48,11 @@ These constraints are set by our etching process (laser marking / ferric chlorid
 
 ---
 
-## Setting Up Design Rules in KiCad
+## Setting Up Design Rules in KiCad 10
 
 1. Open PCB Editor
 2. Go to **File → Board Setup → Design Rules → Constraints**
 3. Set minimum values as per the table above
 4. Run **Inspect → Design Rules Checker (DRC)** before submitting — zero errors required
+
+KiCad 10 download: https://www.kicad.org/download/

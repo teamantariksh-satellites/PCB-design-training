@@ -1,50 +1,53 @@
 # PCB Design Training — Team Antariksh
 
-Welcome to the PCB Design Training repository! This is where you'll submit your KiCad schematic and PCB layout project.
+Welcome to the PCB Design Training repository. This is where you submit your KiCad schematic and PCB layout project.
 
 ---
 
-## 🎯 Project Brief
+## Project Brief
 
 Design a PCB for a project of your choice that includes:
-- A **microcontroller** (Arduino, STM32, ESP32, ATtiny, etc.)
-- At least one **sensor** (temperature, IMU, ultrasonic, etc.)
-- At least one **actuator or driver** (motor driver, relay, LED driver, etc.)
+- A microcontroller (Arduino, STM32, ESP32, ATtiny, etc.)
+- At least one sensor (temperature, IMU, ultrasonic, etc.)
+- At least one actuator or driver (motor driver, relay, LED driver, etc.)
 - Supporting passives (resistors, capacitors, connectors)
 
-The final board will be:
-1. Single-layer PCB layout
-2. Etched using laser marking or ferric chloride
-3. Drilled, soldered with female headers, and components attached
+The final board will be single-layer, etched using laser marking or ferric chloride, drilled, and soldered with female headers.
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 PCB-design-training/
-├── README.md                  ← You are here
-├── template/                  ← Copy this folder to get started
+├── README.md
+├── template/                  <- Copy this to get started
 │   ├── README_template.md
 │   └── kicad_project/
-│       ├── project.kicad_pro
-│       ├── project.kicad_sch
-│       └── project.kicad_pcb
 ├── resources/
-│   ├── design_rules.md        ← PCB constraints for etching
+│   ├── design_rules.md        <- PCB constraints for etching
 │   ├── component_guidelines.md
 │   └── submission_checklist.md
 └── students/
-    └── <your-name>/           ← Your submission goes here
-        ├── README.md
-        └── kicad_project/
+    └── <your-name>/           <- Your submission goes here
 ```
 
 ---
 
-## 🚀 How to Submit Your Project
+## Getting Access to This Repo
 
-### Step 1 — Fork or Clone
+Since this repo is private, you need to be added as a collaborator before you can clone or push.
+
+Fill in this form and you will be automatically invited:
+**[Request Access Form](https://forms.gle/REPLACE_WITH_YOUR_FORM_LINK)**
+
+You will get a GitHub invitation email — accept it, then proceed below.
+
+---
+
+## How to Submit Your Project
+
+### Step 1 — Clone
 
 ```bash
 git clone https://github.com/teamantariksh-satellites/PCB-design-training.git
@@ -53,27 +56,30 @@ cd PCB-design-training
 
 ### Step 2 — Create your folder
 
-Copy the template into the `students/` directory using your name:
+Copy the template into `students/` using your name (lowercase, no spaces):
 
 ```bash
+# Windows
+xcopy template students\your-name /E /I
+
+# Mac/Linux
 cp -r template students/your-name
 ```
 
-> Use lowercase, no spaces. Example: `students/riya-sharma` or `students/arjun-v`
+Example: `students/riya-sharma` or `students/arjun-v`
 
 ### Step 3 — Work on your project
 
-- Open `students/your-name/kicad_project/project.kicad_pro` in KiCad
-- Design your schematic in the Schematic Editor
-- Create your PCB layout in the PCB Editor
-- Follow the design rules in `resources/design_rules.md`
+Open `students/your-name/kicad_project/project.kicad_pro` in KiCad 10.
 
-### Step 4 — Export your files
+Design your schematic, then create the PCB layout. Follow the rules in `resources/design_rules.md` before you start routing.
 
-Before submitting, export from KiCad:
-- **Schematic PDF** → File → Plot → PDF
-- **Gerber files** → PCB Editor → File → Fabrication Outputs → Gerbers
-- **BOM** (Bill of Materials)
+### Step 4 — Export before submitting
+
+From KiCad, export:
+- Schematic as PDF: File > Plot > PDF
+- Gerber files: PCB Editor > File > Fabrication Outputs > Gerbers
+- BOM: Tools > Generate BOM
 
 Place all exports inside your project folder.
 
@@ -86,33 +92,59 @@ git commit -m "Add PCB project: [brief description] - your-name"
 git push origin submission/your-name
 ```
 
-Then open a **Pull Request** on GitHub with:
+Open a Pull Request with:
 - Title: `[Submission] Your Name — Project Name`
 - Description: Brief explanation of your circuit and component choices
 
 ---
 
-## ✅ Submission Checklist
+## Asking Questions
 
-See [`resources/submission_checklist.md`](resources/submission_checklist.md) for the full checklist before raising a PR.
+Open a GitHub Issue in this repo with the label `question`. Tag your mentor in the issue. This way everyone can see the answer — not just you.
 
----
-
-## 📐 Design Rules (Important!)
-
-Since we're etching these boards ourselves, there are strict constraints. Read [`resources/design_rules.md`](resources/design_rules.md) before starting your layout.
+Do not ask on WhatsApp or in DMs for anything technical.
 
 ---
 
-## 🛠 Tools Required
+## Submission Checklist
+
+See [resources/submission_checklist.md](resources/submission_checklist.md) before raising a PR.
+
+---
+
+## Design Rules
+
+Read [resources/design_rules.md](resources/design_rules.md) before starting your layout. These are hard constraints set by our etching process.
+
+---
+
+## Tools Required
 
 | Tool | Version | Download |
 |------|---------|----------|
-| KiCad | 7.x or 8.x | [kicad.org](https://www.kicad.org/) |
+| KiCad | 10.x | [kicad.org/download](https://www.kicad.org/download/) |
 | Git | Latest | [git-scm.com](https://git-scm.com/) |
 
 ---
 
-## 🙋 Questions?
+## Open Source KiCad Projects to Explore
 
-Open a GitHub **Issue** with the label `question` and tag your mentor. Don't ask in WhatsApp — keeping it here means everyone benefits from the answer.
+Looking at real projects is the fastest way to learn. Here are some worth studying:
+
+| Project | What it is | Why it's interesting |
+|---------|-----------|----------------------|
+| [Arduino UNO R3 (official KiCad files)](https://github.com/arduino/ArduinoCore-avr/tree/master/boards) | The classic Arduino board | See how a real product is laid out |
+| [Keyboard PCB by jmdaly/CO60](https://github.com/jmdaly/CO60) | Open hardware 60% keyboard | Clean single-board layout, good silkscreen practice |
+| [ESP32 LiFePO4 board](https://github.com/pho/esp32-lifepo4-board) | ESP32 + battery charging circuit | Compact mixed-signal layout |
+| [scottokeebs](https://github.com/joe-scotto/scottokeebs) | Collection of keyboard/macropad PCBs | Great for studying component placement |
+| [svg2shenzhen](https://github.com/badgeek/svg2shenzhen) | Art PCBs made from Inkscape SVGs | Shows how creative PCB art works |
+| [kicad-3rd-party-tools](https://github.com/devbisme/kicad-3rd-party-tools) | Curated list of KiCad tools | Useful plugins and scripts |
+| [SparkFun KiCad Libraries](https://github.com/sparkfun/SparkFun-KiCad-Libraries) | SparkFun's component library | Reference for footprints and symbols |
+| [Beginner's Guide to KiCad](https://github.com/pablov55/Beginner-s-Guide-to-KiCad) | Step-by-step guide with project files | Good companion to this training |
+
+---
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->

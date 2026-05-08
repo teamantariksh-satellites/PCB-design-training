@@ -1,0 +1,98 @@
+name: Grant access from issue form
+
+# Triggers when an issue with the 'access-request' label is opened
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  grant-access:
+    runs-on: ubuntu-latest
+    # Only run for issues with the access-request label
+    if: contains(github.event.issue.labels.*.name, 'access-request')
+    steps:
+      - name: Parse GitHub username from issue body
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const body = context.payload.issue.body;
+
+            // The issue form puts the answer after the field label
+            // We look for the GitHub Username field answer
+            const lines = body.split('\n');
+            let username = null;
+
+            for (let i = 0; i < lines.length; i++) {
+              if (lines[i].trim().toLowerCase().includes('github username')) {
+                // The answer is on the next non-empty line
+                for (let j = i + 1; j < lines.length; j++) {
+                  const candidate = lines[j].trim();
+                  if (candidate && !candidate.startsWith('#') && !candidate.startsWith('_')) {
+                    username = candidate.replace(/^@/, ''); // strip leading @ if present
+                    break;
+                  }
+                }
+                break;
+              }
+            }
+
+            if (!username) {
+              core.setFailed('Could not parse GitHub username from issue body.');
+              return;
+            }
+
+            console.log(`Parsed username: ${username}`);
+            core.setOutput('username', username);
+
+      - name: Add user as collaborator
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.COLLABORATOR_PAT }}
+          script: |
+            const username = '${{ steps.parse.outputs.username }}';
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            if (!username) {
+              core.setFailed('No username to add.');
+              return;
+            }
+
+            try {
+              await github.rest.repos.addCollaborator({
+                owner,
+                repo,
+                username,
+                permission: 'push'
+              });
+              console.log(`Invited ${username} as collaborator.`);
+            } catch (error) {
+              if (error.status === 422) {
+                console.log(`${username} is already a collaborator.`);
+              } else {
+                throw error;
+              }
+            }
+
+      - name: Comment on issue
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const username = '${{ steps.parse.outputs.username }}';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              body: `Hi @${username}! A collaborator invitation has been sent to your GitHub account. Check your email or go to https://github.com/notifications to accept it.\n\nOnce accepted, you can clone the repo and get started. Read the README for instructions.`
+            });
+
+            // Close the issue after processing
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              state: 'closed'
+            });
